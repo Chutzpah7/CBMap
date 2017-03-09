@@ -19,5 +19,8 @@ public class SimulationCanvas extends JPanel {
 		super.paintComponent(q);
 		Graphics2D g = (Graphics2D)q;
 		
+		//Draw Vehicle--------------------------------------------------------
+		g.setColor(vehicleColor);
+		//--------------------------------------------------------------------
 	}
 }
