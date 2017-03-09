@@ -14,6 +14,9 @@ public class Runner extends JFrame {
 	public static String benefitFunction = "Linear";
 	public static String comboMethod = "Addition";
 	public static boolean paused = true;
+	public static JPanel benefitMap;
+	public static JPanel costMap;
+	public static JPanel comboMap;
 	
 	
 	private JPanel contentPane;
@@ -180,16 +183,16 @@ public class Runner extends JFrame {
 		mapContainer.setLayout(new GridLayout(0, 1, 0, 0));
 		mapContainer.setPreferredSize(new Dimension(250, 480));
 		
-		JPanel benefitMap = new BenefitMapPanel();
+		MapPanel benefitMap = new MapPanel("Benefit", SimulationCanvas.objectiveColor);
 		benefitMap.setBorder(new TitledBorder(null, "Benefit Map", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		mapContainer.add(benefitMap);
 		
-		JPanel costMap = new CostMapPanel();
+		MapPanel costMap = new MapPanel("Cost", SimulationCanvas.obstacleColor);
 		mapContainer.add(costMap);
 		costMap.setBorder(new TitledBorder(null, "Cost Map", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		
-		JPanel comboMap = new JPanel();
+		MapPanel comboMap = new MapPanel("Combo", SimulationCanvas.vehicleColor);
 		mapContainer.add(comboMap);
 		comboMap.setBorder(new TitledBorder(null, "Combo Map", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
@@ -225,6 +228,14 @@ public class Runner extends JFrame {
 		};
 		//------------------------------------------------------------------------------------------------------
 		togglePause.addActionListener(pauseListener);
+		
+		ActionListener stepListener = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				canvas.repaint();
+			}
+		};
 		
 		
 		

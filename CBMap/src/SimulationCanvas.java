@@ -12,9 +12,9 @@ public class SimulationCanvas extends JPanel {
 	public static Simulation simulationObject;
 	
 	private final int xViewRange = 150;
-	private final Color vehicleColor = new Color(0x2f, 0x62, 0xbe);
-	private final Color obstacleColor = new Color(0xc9, 0x13, 0x00);
-	private final Color objectiveColor = new Color(0x0f, 0xa4, 0x00);
+	public static final Color vehicleColor = new Color(0x2f, 0x62, 0xbe);
+	public static final Color obstacleColor = new Color(0xc9, 0x13, 0x00);
+	public static final Color objectiveColor = new Color(0x0f, 0xa4, 0x00);
 	public SimulationCanvas(){
 		super();
 		simulationObject = new Simulation();

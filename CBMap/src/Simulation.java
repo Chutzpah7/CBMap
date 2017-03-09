@@ -55,11 +55,23 @@ public class Simulation {
 	public double getObstacleRadius(){
 		return obstacleRadius;
 	}
+	public double[] getCostMap(){
+		return costMap;
+	}
+	public double[] getBenefitMap(){
+		return benefitMap;
+	}
+	public double[] getComboMap(){
+		return comboMap;
+	}
 	public void step(){
 		//Generate maps
 		updateBenefitMap();
 		updateCostMap();
 		updateComboMap();
+		
+		//Update maps
+		
 		//Choose headingChange
 		
 		int maxCBIndex = 0;
