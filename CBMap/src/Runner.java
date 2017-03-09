@@ -219,6 +219,7 @@ public class Runner extends JFrame {
 				} else {
 					paused = true;
 					togglePause.setText("▶");
+					System.out.println(canvas.getWidth());
 				}
 				backwardStep.setEnabled(paused);
 				forwardStep.setEnabled(paused);
