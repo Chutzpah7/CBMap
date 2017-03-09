@@ -1,13 +1,19 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
-public class CostMapPanel extends JPanel {
-	public CostMapPanel(){
+
+public class ComboMapPanel extends JPanel{
+	public ComboMapPanel(){
 		super();
 	}
 	
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics q){
+		
+		Graphics2D g = (Graphics2D)q;
+		
+		
 		//Loop if unpaused----------------------------------------------------
 				if(!Runner.paused){
 					if(SimulationCanvas.simulationObject.isAlive()){

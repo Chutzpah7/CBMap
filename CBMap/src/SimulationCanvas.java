@@ -13,8 +13,8 @@ public class SimulationCanvas extends JPanel {
 	
 	private final int xViewRange = 150;
 	private final Color vehicleColor = new Color(0x2f, 0x62, 0xbe);
-	private final Color obstacleColor = Color.red;
-	private final Color objectiveColor = Color.green;
+	private final Color obstacleColor = new Color(0xc9, 0x13, 0x00);
+	private final Color objectiveColor = new Color(0x0f, 0xa4, 0x00);
 	public SimulationCanvas(){
 		super();
 		simulationObject = new Simulation();
@@ -26,7 +26,7 @@ public class SimulationCanvas extends JPanel {
 		
 		super.paintComponent(q);
 		Graphics2D g = (Graphics2D)q;
-		setBackground(Color.WHITE);setOpaque(true);// remove
+		//setBackground(Color.WHITE);setOpaque(true);// remove
 		
 		//Draw Vehicle--------------------------------------------------------
 		g.setColor(vehicleColor);
@@ -50,7 +50,7 @@ public class SimulationCanvas extends JPanel {
 		
 		//Loop if unpaused----------------------------------------------------
 		if(!Runner.paused){
-			if(simulationObject.isAlive()){
+			if(SimulationCanvas.simulationObject.isAlive()){
 				repaint(); //This could be more efficient
 			}
 		}
