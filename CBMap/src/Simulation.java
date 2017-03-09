@@ -12,11 +12,11 @@ public class Simulation {
 	private double heading; //θ
 	private double headingChange; //dθ/dt
 	private double maxHeadingChangeMagnitude = 5; //Degrees per second
-	private final double speed = 0.5;
+	private final double speed = 1.5;
 	//----------------------------------------------------------------------
 	
 	//Time related variables------------------------------------------------
-	private final double timeStep = 0.005;
+	public static final double timeStep = 0.005;
 	private int stepsElapsed = 0;
 	private boolean dead = false;
 	//----------------------------------------------------------------------
@@ -69,8 +69,6 @@ public class Simulation {
 		updateBenefitMap();
 		updateCostMap();
 		updateComboMap();
-		
-		//Update maps
 		
 		//Choose headingChange
 		

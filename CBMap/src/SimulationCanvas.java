@@ -24,6 +24,10 @@ public class SimulationCanvas extends JPanel {
 		
 		simulationObject.step();
 		
+		Runner.costMap.repaint();
+		Runner.benefitMap.repaint();
+		Runner.comboMap.repaint();
+		
 		super.paintComponent(q);
 		Graphics2D g = (Graphics2D)q;
 		//setBackground(Color.WHITE);setOpaque(true);// remove

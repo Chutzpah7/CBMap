@@ -14,9 +14,9 @@ public class Runner extends JFrame {
 	public static String benefitFunction = "Linear";
 	public static String comboMethod = "Addition";
 	public static boolean paused = true;
-	public static JPanel benefitMap;
-	public static JPanel costMap;
-	public static JPanel comboMap;
+	public static MapPanel benefitMap;
+	public static MapPanel costMap;
+	public static MapPanel comboMap;
 	
 	
 	private JPanel contentPane;
@@ -183,16 +183,16 @@ public class Runner extends JFrame {
 		mapContainer.setLayout(new GridLayout(0, 1, 0, 0));
 		mapContainer.setPreferredSize(new Dimension(250, 480));
 		
-		MapPanel benefitMap = new MapPanel("Benefit", SimulationCanvas.objectiveColor);
+		benefitMap = new MapPanel("Benefit", SimulationCanvas.objectiveColor);
 		benefitMap.setBorder(new TitledBorder(null, "Benefit Map", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		mapContainer.add(benefitMap);
 		
-		MapPanel costMap = new MapPanel("Cost", SimulationCanvas.obstacleColor);
+		costMap = new MapPanel("Cost", SimulationCanvas.obstacleColor);
 		mapContainer.add(costMap);
 		costMap.setBorder(new TitledBorder(null, "Cost Map", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		
-		MapPanel comboMap = new MapPanel("Combo", SimulationCanvas.vehicleColor);
+		comboMap = new MapPanel("Combo", SimulationCanvas.vehicleColor);
 		mapContainer.add(comboMap);
 		comboMap.setBorder(new TitledBorder(null, "Combo Map", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
@@ -233,9 +233,13 @@ public class Runner extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				for(int i = 1; i < (int)(1.0/Simulation.timeStep); i++)
+					canvas.simulationObject.step();
 				canvas.repaint();
 			}
+			
 		};
+		forwardStep.addActionListener(stepListener);
 		
 		
 		
