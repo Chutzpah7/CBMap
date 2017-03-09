@@ -1,26 +1,70 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.geom.Point2D;
 
 import javax.swing.JPanel;
 
 public class SimulationCanvas extends JPanel {
 	
+	
 	public static Simulation simulationObject;
 	
+	private final int xViewRange = 150;
 	private final Color vehicleColor = new Color(0x2f, 0x62, 0xbe);
-	
+	private final Color obstacleColor = Color.red;
+	private final Color objectiveColor = Color.green;
 	public SimulationCanvas(){
 		super();
 		simulationObject = new Simulation();
 		
 	}
 	public void paintComponent(Graphics q){
+		
+		simulationObject.step();
+		
 		super.paintComponent(q);
 		Graphics2D g = (Graphics2D)q;
+		setBackground(Color.WHITE);setOpaque(true);// remove
 		
 		//Draw Vehicle--------------------------------------------------------
 		g.setColor(vehicleColor);
+		Point veh = pointToPixel(simulationObject.getPosition());
+		g.fillOval((int)veh.getX()-5, (int)veh.getY()-5, 10, 10);//TODO make this into a nice arrow looking thing to be able to see heading. Means using rotation matrix :(
+		
 		//--------------------------------------------------------------------
+		
+		//Draw Obstacle-------------------------------------------------------
+		g.setColor(obstacleColor);
+		Point obs = pointToPixel(simulationObject.getObstacle());
+		int radius = (int)(simulationObject.getObstacleRadius()*getWidth()/xViewRange);
+		g.fillOval((int)obs.getX()-radius, (int)obs.getY()-radius, 2*radius, 2*radius);
+		//--------------------------------------------------------------------
+		
+		//Draw Objective------------------------------------------------------
+		g.setColor(objectiveColor);
+		Point obj = pointToPixel(simulationObject.getObjective());
+		g.fillOval((int)obj.getX()-5, (int)obj.getY()-5, 10, 10);
+		//--------------------------------------------------------------------
+		
+		//Loop if unpaused----------------------------------------------------
+		if(!Runner.paused){
+			if(simulationObject.isAlive()){
+				repaint(); //This could be more efficient
+			}
+		}
+		//--------------------------------------------------------------------
+	}
+	// This is sooooooo ugly but it works
+	public Point pointToPixel(Point2D p) {
+		//calculation to get square aspect ratio
+		double n=(double)xViewRange*getHeight()/getWidth();
+		
+		Point ret = new Point((int)((p.getX()+(xViewRange - simulationObject.getObjective().getX())/2.0)*getWidth()/xViewRange), (int)((n/2-p.getY())*getHeight()/n));
+		return ret;
+	}
+	public Simulation getSimulationObject(){
+		return simulationObject;
 	}
 }

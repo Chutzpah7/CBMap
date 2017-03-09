@@ -6,18 +6,19 @@ public class Simulation {
 	
 	private Point2D obstacle;
 	private Point2D objectave;
-	
+	private double obstacleRadius = 5;	
 	//Vehicle Information---------------------------------------------------
 	private Point2D.Float position;
 	private double heading; //θ
 	private double headingChange; //dθ/dt
 	private double maxHeadingChangeMagnitude = 5; //Degrees per second
-	private final double speed = 1.5;
+	private final double speed = 0.5;
 	//----------------------------------------------------------------------
 	
 	//Time related variables------------------------------------------------
-	private final double timeStep = 0.05;
+	private final double timeStep = 0.005;
 	private int stepsElapsed = 0;
+	private boolean dead = false;
 	//----------------------------------------------------------------------
 
 	
@@ -51,6 +52,9 @@ public class Simulation {
 	public double getHeading(){
 		return heading;
 	}
+	public double getObstacleRadius(){
+		return obstacleRadius;
+	}
 	public void step(){
 		//Generate maps
 		updateBenefitMap();
@@ -68,8 +72,10 @@ public class Simulation {
 		//Increment heading
 		heading = heading + timeStep*headingChange;
 		//Increment position
-		position.setLocation(position.getX()+getDX(),
-				position.getY()+getDY());
+		position.setLocation(position.getX()+getDX()*timeStep,
+				position.getY()+getDY()*timeStep);
+		//Check if alive
+		//Check if at objective
 		
 	}
 	public void updateBenefitMap(){
@@ -96,6 +102,9 @@ public class Simulation {
 		default:
 			break;
 		}
+	}
+	public boolean isAlive(){
+		return !dead;
 	}
 	public void updateComboMap(){
 		switch (Runner.comboMethod) {

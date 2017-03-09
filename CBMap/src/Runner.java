@@ -170,7 +170,7 @@ public class Runner extends JFrame {
 		tabbedPane.addTab("Simulation", null, simTab, null);
 		simTab.setLayout(new BorderLayout(0, 0));
 		
-		JPanel canvas = new SimulationCanvas();
+		SimulationCanvas canvas = new SimulationCanvas();
 		simTab.add(canvas, BorderLayout.CENTER);
 		canvas.setBorder(new TitledBorder(null, "Simulation", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
@@ -200,11 +200,9 @@ public class Runner extends JFrame {
 		Box horizontalBox = Box.createHorizontalBox();
 		buttonContainer.add(horizontalBox);
 		
-		JButton backwardStep = new JButton("⏮");
 		JButton forwardStep = new JButton("⏭");	
 		JButton togglePause = new JButton("▶");
 		
-		horizontalBox.add(backwardStep);
 		horizontalBox.add(togglePause);
 		horizontalBox.add(forwardStep);
 		
@@ -216,12 +214,12 @@ public class Runner extends JFrame {
 				if(paused){
 					paused = false;
 					togglePause.setText("⏸");
+					canvas.repaint();
 				} else {
 					paused = true;
 					togglePause.setText("▶");
 					System.out.println(canvas.getWidth());
 				}
-				backwardStep.setEnabled(paused);
 				forwardStep.setEnabled(paused);
 			}
 		};
