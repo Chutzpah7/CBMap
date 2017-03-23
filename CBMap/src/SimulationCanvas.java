@@ -60,7 +60,6 @@ public class SimulationCanvas extends JPanel {
 		}
 		//--------------------------------------------------------------------
 	}
-	// This is sooooooo ugly but it works
 	public Point pointToPixel(Point2D p) {
 		//calculation to get square aspect ratio
 		double n=(double)xViewRange*getHeight()/getWidth();

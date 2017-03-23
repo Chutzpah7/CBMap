@@ -24,7 +24,6 @@ public class MapPanel extends JPanel{
 		switch (mapType) {
 		case "Cost":
 			mapPoints = SimulationCanvas.simulationObject.getCostMap();
-			setBackground(Color.WHITE);setOpaque(true);
 			break;
 		case "Benefit":
 			mapPoints = SimulationCanvas.simulationObject.getBenefitMap();

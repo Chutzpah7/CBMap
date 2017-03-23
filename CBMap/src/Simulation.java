@@ -23,6 +23,11 @@ public class Simulation {
 
 	
 	//CB Maps---------------------------------------------------------------
+	/*
+	 * These have a known number of heading options, and based on the maximum heading change and
+	 * the number of heading options, each index can be mapped to a specific heading. Arrays are
+	 * efficient for holding these fixed double values for each heading.
+	*/
 	private double[] costMap = new double[headingOptions];
 	private double[] benefitMap = new double[headingOptions];
 	private double[] comboMap = new double[headingOptions];
@@ -64,6 +69,8 @@ public class Simulation {
 	public double[] getComboMap(){
 		return comboMap;
 	}
+	
+	// This step method represents a very small amount of time passing.
 	public void step(){
 		//Generate maps
 		updateBenefitMap();
@@ -75,25 +82,31 @@ public class Simulation {
 		int maxCBIndex = 0;
 		for(int i = 1; i<headingOptions; i++){
 			if (comboMap[i] > comboMap[maxCBIndex]){
-				
+				maxCBIndex = i;
 			}
 		}
-		headingChange = 2*maxHeadingChangeMagnitude/(headingOptions)*maxCBIndex-maxHeadingChangeMagnitude;
+		
+		//This calculation calculates the corresponding heading change of an index in a map array
+		headingChange = 2.0*maxHeadingChangeMagnitude/(headingOptions)*maxCBIndex-maxHeadingChangeMagnitude;
+		
 		//Increment heading
 		heading = heading + timeStep*headingChange;
+		
 		//Increment position
 		position.setLocation(position.getX()+getDX()*timeStep,
 				position.getY()+getDY()*timeStep);
-		//Check if alive
-		//Check if at objective
+		
+		//TODO: Check if alive
+		
+		//TODO: Check if at objective
 		
 	}
 	public void updateBenefitMap(){
 		switch (Runner.benefitFunction) {
 		case "Linear":
 			int optimalHeadingIndex = 0;
-			for(int i = 1; i < headingOptions; i++){
-				//TODO
+			for(int i = 0; i < headingOptions; i++){
+				//TODO 
 			}
 			break;
 
